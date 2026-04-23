@@ -1,0 +1,13 @@
+name: Snyk Scan
+on: [push, pull_request]
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master  # Change 'node' to your language (python, maven, etc.)
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor # This uploads the results back to your Snyk dashboard
